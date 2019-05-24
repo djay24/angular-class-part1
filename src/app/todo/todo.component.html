@@ -1,0 +1,33 @@
+<h1 class="header">Things Todo</h1>
+<h2>{{ newTodo.title }}</h2>
+<div class="todos">
+  <ul>
+    <ng-container *ngFor="let todo of todos">
+        <li *ngIf=" !todo.isDeleted"
+        [ngClass]="{ 'completed': todo.isCompleted }"
+        (click)="toggleCompleted(todo)"> {{ todo.title }}
+       <span (click)="toggleDeleted(todo)">
+        x
+       </span>
+      </li>
+    </ng-container>
+  </ul>
+  <form (ngSubmit)="addTodo()">
+    <input type="text" [(ngModel)]="newTodo.title" name="Title">
+    <button class="addButton">Add</button>
+</form>
+</div>
+
+<hr>
+
+<div class="trash">
+  <h2>Trash</h2>
+  <ul>
+      <ng-container *ngFor="let todo of todos">
+        <li *ngIf="todo.isDeleted">
+          {{ todo.title }}
+          <span (click)="toggleDeleted(todo)">+</span>
+        </li>
+        </ng-container>
+  </ul>
+</div>
